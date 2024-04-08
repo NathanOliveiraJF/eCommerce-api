@@ -1,0 +1,26 @@
+{
+    "name": "nathan/ecommerce",
+    "autoload": {
+        "psr-4": {
+            "modules\\": "modules/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nathan Oliveira",
+            "email": "nathanoliveira003jf@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/migrations": "^3.7",
+        "doctrine/orm": "^3.1",
+        "vlucas/phpdotenv": "^5.6",
+        "symfony/cache": "^7.0",
+        "pecee/simple-router": "5.4.1.7",
+        "symfony/dependency-injection": "^7.0",
+        "php-di/php-di": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    }
+}
