@@ -1,5 +1,5 @@
 <?php
-namespace modules\Shared\Doctrine;
+namespace Modules\Shared\Doctrine;
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;

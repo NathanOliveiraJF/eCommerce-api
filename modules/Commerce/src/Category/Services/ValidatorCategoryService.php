@@ -1,9 +1,9 @@
 <?php
 
-namespace modules\Commerce\src\Category\Services;
+namespace Modules\Commerce\src\Category\Services;
 
-use modules\Commerce\src\Category\DTO\CategoryDTO;
-use modules\Commerce\src\Category\Validator\ValidatorInterface;
+use Modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\Validator\ValidatorInterface;
 
 class ValidatorCategoryService implements  ValidatorCategoryServiceInterface
 {

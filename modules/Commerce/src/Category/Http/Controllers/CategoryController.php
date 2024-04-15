@@ -1,13 +1,11 @@
 <?php
 
-namespace modules\Commerce\src\Category\Http\Controllers;
+namespace Modules\Commerce\src\Category\Http\Controllers;
 
-use modules\Commerce\src\Category\DTO\CategoryDTO;
-use modules\Commerce\src\Category\Exceptions\CategoryException;
-use modules\Commerce\src\Category\Repositories\CategoryRepositoryInterface;
-use modules\Commerce\src\Category\Services\CategoryService;
-use modules\Commerce\src\Category\Services\CategoryServiceInterface;
-use parallel\Events\Input;
+use Modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\Exceptions\CategoryException;
+use Modules\Commerce\src\Category\Services\CategoryService;
+use Modules\Commerce\src\Category\Services\CategoryServiceInterface;
 
 class CategoryController
 {
@@ -35,5 +33,11 @@ class CategoryController
         } catch (CategoryException $categoryException) {
             response()->httpCode(400)->json(array('statusCode' => '400', 'message' => $categoryException->getMessage()));
         }
+    }
+
+    public function getAllCategory(): void
+    {
+        $categories = $this->categoryService->findAll();
+        response()->httpCode(200)->json(array('statusCode' => '200', 'categories' => $categories));
     }
 }

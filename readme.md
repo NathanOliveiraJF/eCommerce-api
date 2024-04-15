@@ -23,16 +23,16 @@
 - Validations: https://packagist.org/packages/symfony/validator
 - Migrations / Orm: https://www.doctrine-project.org/projects/doctrine-migrations/en/3.7/reference/introduction.html
 
-## Migrations
+## Scripts
 
-**generate tables for database**
+**run dev default port 8000:**
+composer dev:start
 
-./vendor/bin/doctrine-migrations migrate
+**run migrations:**
+composer mig:up
 
-**run down and up migration**
+**down migrations:**
+composer mig:down
 
-**Delete tables**
-./vendor/bin/doctrine-migrations migrations:execute --down 'database\migrations\Version20240331165337'
-
-**Create tables**
-./vendor/bin/doctrine-migrations migrations:execute --up 'database\migrations\Version20240331165337'
+**create migration:**
+composer mig:migrate

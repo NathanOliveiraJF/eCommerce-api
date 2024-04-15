@@ -1,9 +1,9 @@
 <?php
 
-namespace modules\Shared\Doctrine;
+namespace Modules\Shared\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
-use modules\Commerce\src\Category\Entity\Category;
+use Modules\Commerce\src\Category\Entity\Category;
 
 interface EntityManagerFactoryInterface
 {

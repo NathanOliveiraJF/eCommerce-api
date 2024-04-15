@@ -1,8 +1,8 @@
 <?php
 
-namespace modules\Commerce\src\Category\Services;
+namespace Modules\Commerce\src\Category\Services;
 
-use modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\DTO\CategoryDTO;
 
 interface CategoryServiceInterface
 {
@@ -11,4 +11,9 @@ interface CategoryServiceInterface
      * @return void
      */
     public function save(CategoryDTO $categoryDTO): void;
+
+    /**
+     * @return array
+     */
+    public function findAll(): array;
 }

@@ -1,14 +1,10 @@
 <?php
 
-namespace modules\Commerce\src\Category\Repositories;
+namespace Modules\Commerce\src\Category\Repositories;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use modules\Commerce\src\Category\DTO\CategoryDTO;
-use modules\Commerce\src\Category\Entity\Category;
-use modules\Commerce\src\Category\Exceptions\CategoryException;
-use modules\Shared\Doctrine\EntityManagerFactoryInterface;
+use Modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\Entity\Category;
+use Modules\Shared\Doctrine\EntityManagerFactoryInterface;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
@@ -32,5 +28,13 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function findByCode(string $categoryCode): array
     {
         return $this->entityManagerFactory->getEntityManager()->getRepository(Category::class)->findBy(['code' => $categoryCode]);
+    }
+
+    /**
+     * @return array
+     */
+    public function findAll(): array
+    {
+        return $this->entityManagerFactory->getEntityManager()->getRepository(Category::class)->findAll();
     }
 }

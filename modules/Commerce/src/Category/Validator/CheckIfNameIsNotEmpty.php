@@ -1,8 +1,8 @@
 <?php
 
-namespace modules\Commerce\src\Category\Validator;
+namespace Modules\Commerce\src\Category\Validator;
 
-use modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\DTO\CategoryDTO;
 
 class CheckIfNameIsNotEmpty implements ValidatorInterface
 {

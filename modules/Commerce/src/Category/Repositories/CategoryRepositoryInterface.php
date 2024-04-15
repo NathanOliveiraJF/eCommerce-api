@@ -1,9 +1,9 @@
 <?php
 
-namespace modules\Commerce\src\Category\Repositories;
+namespace Modules\Commerce\src\Category\Repositories;
 
-use modules\Commerce\src\Category\DTO\CategoryDTO;
-use modules\Commerce\src\Category\Entity\Category;
+use Modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\Entity\Category;
 
 interface CategoryRepositoryInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\Commerce\src\Category\Exceptions;
+namespace Modules\Commerce\src\Category\Exceptions;
 
 class CategoryException extends \Exception
 {

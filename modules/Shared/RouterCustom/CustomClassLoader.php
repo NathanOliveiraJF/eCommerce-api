@@ -1,22 +1,24 @@
 <?php
 
-namespace modules\Shared\RouterCustom;
+namespace Modules\Shared\RouterCustom;
 
 use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Exception;
-use modules\Commerce\src\Category\Repositories\CategoryRepository;
-use modules\Commerce\src\Category\Repositories\CategoryRepositoryInterface;
-use modules\Commerce\src\Category\Services\CategoryService;
-use modules\Commerce\src\Category\Services\CategoryServiceInterface;
-use modules\Commerce\src\Category\Services\ValidatorCategoryService;
-use modules\Commerce\src\Category\Services\ValidatorCategoryServiceInterface;
-use modules\Commerce\src\Category\Validator\CheckIfCategoryAlreadyExist;
-use modules\Commerce\src\Category\Validator\CheckIfCodeIsNotEmpty;
-use modules\Commerce\src\Category\Validator\CheckIfNameIsNotEmpty;
-use modules\Shared\Doctrine\EntityManagerFactory;
-use modules\Shared\Doctrine\EntityManagerFactoryInterface;
+use Modules\Commerce\src\Category\Repositories\CategoryRepository;
+use Modules\Commerce\src\Category\Repositories\CategoryRepositoryInterface;
+use Modules\Commerce\src\Category\Services\CategoryService;
+use Modules\Commerce\src\Category\Services\CategoryServiceInterface;
+use Modules\Commerce\src\Category\Services\ValidatorCategoryService;
+use Modules\Commerce\src\Category\Services\ValidatorCategoryServiceInterface;
+use Modules\Commerce\src\Category\Validator\CheckIfCodeIsNotEmpty;
+use Modules\Commerce\src\Category\Validator\CheckIfNameIsNotEmpty;
+use Modules\Logger\System\SystemLogger;
+use Modules\Logger\System\SystemLoggerInterface;
+use Modules\Shared\Doctrine\EntityManagerFactory;
+use Modules\Shared\Doctrine\EntityManagerFactoryInterface;
+use Monolog\Logger;
 use Pecee\SimpleRouter\ClassLoader\IClassLoader;
 use Pecee\SimpleRouter\Exceptions\ClassNotFoundHttpException;
 use function DI\autowire;
@@ -35,6 +37,8 @@ class CustomClassLoader implements IClassLoader
             CategoryRepositoryInterface::class => autowire(CategoryRepository::class),
             CategoryServiceInterface::class => autowire(CategoryService::class),
             ValidatorCategoryServiceInterface::class => autowire(ValidatorCategoryService::class)->constructor([new CheckIfCodeIsNotEmpty(), new CheckIfNameIsNotEmpty()]),
+            SystemLoggerInterface::class => autowire(SystemLogger::class)->constructor(new Logger('system'))
+
         ])->build();
     }
 
