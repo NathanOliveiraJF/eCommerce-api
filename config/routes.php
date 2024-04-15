@@ -1,7 +1,7 @@
 <?php
 
-use Modules\Commerce\src\Category\Http\Controllers\CategoryController;
-use Modules\Shared\RouterCustom\CustomClassLoader;
+use Commerce\Category\Http\Controllers\CategoryController;
+use Commerce\Shared\RouterCustom\CustomClassLoader;
 use Pecee\SimpleRouter\SimpleRouter as Route;
 
 Route::setCustomClassLoader(new CustomClassLoader());

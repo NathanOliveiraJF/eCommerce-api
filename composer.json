@@ -2,7 +2,7 @@
     "name": "nathan/ecommerce",
     "autoload": {
         "psr-4": {
-            "Modules\\": "modules/"
+            "Commerce\\": "Commerce/"
         }
     },
     "authors": [
@@ -12,7 +12,7 @@
         }
     ],
     "scripts": {
-        "dev:start": "php -S localhost:8081",
+        "dev:start": "php -S localhost:8082",
         "mig:up": "php ./vendor/bin/doctrine-migrations migrations:execute --up 'database\\migrations\\Version20240331165337'",
         "mig:down": "php ./vendor/bin/doctrine-migrations migrations:execute --down 'database\\migrations\\Version20240331165337'",
         "mig:migrate": "./vendor/bin/doctrine-migrations migrate"

@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\Commerce\src\Category\Http\Controllers;
+namespace Commerce\Category\Http\Controllers;
 
 use PHPUnit\Framework\TestCase;
 
