@@ -1,6 +1,6 @@
 <?php
 
-namespace Commerce\Shared\RouterCustom;
+namespace Commerce\Shared\DI;
 
 use Commerce\Category\Repositories\CategoryRepository;
 use Commerce\Category\Repositories\CategoryRepositoryInterface;
@@ -23,7 +23,7 @@ use Pecee\SimpleRouter\ClassLoader\IClassLoader;
 use Pecee\SimpleRouter\Exceptions\ClassNotFoundHttpException;
 use function DI\autowire;
 
-class CustomClassLoader implements IClassLoader
+class ClassLoader implements IClassLoader
 {
     protected \DI\Container $container;
 
