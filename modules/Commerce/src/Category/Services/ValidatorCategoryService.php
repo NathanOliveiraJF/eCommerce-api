@@ -2,7 +2,7 @@
 
 namespace Modules\Commerce\src\Category\Services;
 
-use Modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\DTO\CategoryRequestDTO;
 use Modules\Commerce\src\Category\Validator\ValidatorInterface;
 
 class ValidatorCategoryService implements  ValidatorCategoryServiceInterface
@@ -24,10 +24,10 @@ class ValidatorCategoryService implements  ValidatorCategoryServiceInterface
 
     /**
      * validate if the category data is ok
-     * @param CategoryDTO $categoryDTO
+     * @param CategoryRequestDTO $categoryDTO
      * @return string
      */
-    public function validated(CategoryDTO $categoryDTO): string
+    public function validated(CategoryRequestDTO $categoryDTO): string
     {
         foreach ($this->validators as $validator) {
             $this->addErrorMessages($validator->validator($categoryDTO));

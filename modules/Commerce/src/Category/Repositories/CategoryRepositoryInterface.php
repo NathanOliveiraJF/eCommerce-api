@@ -2,16 +2,16 @@
 
 namespace Modules\Commerce\src\Category\Repositories;
 
-use Modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\DTO\CategoryRequestDTO;
 use Modules\Commerce\src\Category\Entity\Category;
 
 interface CategoryRepositoryInterface
 {
     /**
-     * @param CategoryDTO $categoryDTO
+     * @param CategoryRequestDTO $categoryDTO
      * @return void
      */
-    public function save(CategoryDTO $categoryDTO): void;
+    public function save(CategoryRequestDTO $categoryDTO): void;
 
     /**
      * @param string $categoryCode

@@ -2,7 +2,7 @@
 
 namespace Modules\Commerce\src\Category\Repositories;
 
-use Modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\DTO\CategoryRequestDTO;
 use Modules\Commerce\src\Category\Entity\Category;
 use Modules\Shared\Doctrine\EntityManagerFactoryInterface;
 
@@ -18,7 +18,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         $this->entityManagerFactory = $entityManagerFactory;
     }
 
-    public function save(CategoryDTO $categoryDTO): void
+    public function save(CategoryRequestDTO $categoryDTO): void
     {
         $entityManager = $this->entityManagerFactory->getEntityManager();
         $entityManager->persist(new Category(0, $categoryDTO->code, $categoryDTO->name));

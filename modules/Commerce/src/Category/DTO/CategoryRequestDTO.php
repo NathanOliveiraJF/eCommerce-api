@@ -4,7 +4,7 @@ namespace Modules\Commerce\src\Category\DTO;
 
 use Modules\Commerce\src\Category\Entity\Category;
 
-readonly class CategoryDTO
+readonly class CategoryRequestDTO
 {
     /**
      * @param string $code

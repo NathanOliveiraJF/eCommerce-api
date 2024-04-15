@@ -2,15 +2,15 @@
 
 namespace Modules\Commerce\src\Category\Services;
 
-use Modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\DTO\CategoryRequestDTO;
 
 interface CategoryServiceInterface
 {
     /**
-     * @param CategoryDTO $categoryDTO
+     * @param CategoryRequestDTO $categoryDTO
      * @return void
      */
-    public function save(CategoryDTO $categoryDTO): void;
+    public function save(CategoryRequestDTO $categoryDTO): void;
 
     /**
      * @return array

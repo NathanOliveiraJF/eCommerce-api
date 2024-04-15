@@ -2,7 +2,7 @@
 
 namespace Modules\Commerce\src\Category\Http\Controllers;
 
-use Modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\DTO\CategoryRequestDTO;
 use Modules\Commerce\src\Category\Exceptions\CategoryException;
 use Modules\Commerce\src\Category\Services\CategoryService;
 use Modules\Commerce\src\Category\Services\CategoryServiceInterface;
@@ -28,7 +28,7 @@ class CategoryController
     public function postCategory(): void
     {
         try {
-            $this->categoryService->save(CategoryDTO::create(input()->all()));
+            $this->categoryService->save(CategoryRequestDTO::create(input()->all()));
             response()->httpCode(201)->json(array('statusCode' => '201', 'message' => 'category successfully created'));
         } catch (CategoryException $categoryException) {
             response()->httpCode(400)->json(array('statusCode' => '400', 'message' => $categoryException->getMessage()));

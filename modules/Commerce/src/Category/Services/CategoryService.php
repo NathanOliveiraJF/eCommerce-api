@@ -2,7 +2,7 @@
 
 namespace Modules\Commerce\src\Category\Services;
 
-use Modules\Commerce\src\Category\DTO\CategoryDTO;
+use Modules\Commerce\src\Category\DTO\CategoryRequestDTO;
 use Modules\Commerce\src\Category\DTO\CategoryResponseDTO;
 use Modules\Commerce\src\Category\Entity\Category;
 use Modules\Commerce\src\Category\Exceptions\CategoryException;
@@ -43,7 +43,7 @@ class CategoryService implements CategoryServiceInterface
     /**
     * @throws CategoryException
      */
-    public function save(CategoryDTO $categoryDTO): void
+    public function save(CategoryRequestDTO $categoryDTO): void
     {
         $validationsData = $this->validatorCategoryServiceInterface->validated($categoryDTO);
         if ($validationsData) {
@@ -81,7 +81,7 @@ class CategoryService implements CategoryServiceInterface
     /**
      * @throws CategoryException
      */
-    private function checkIfCategoryAlreadyExist(CategoryDTO $categoryDTO): void
+    private function checkIfCategoryAlreadyExist(CategoryRequestDTO $categoryDTO): void
     {
         $alreadyExist = $this->categoryRepository->findByCode($categoryDTO->code);
         if ($alreadyExist) {
