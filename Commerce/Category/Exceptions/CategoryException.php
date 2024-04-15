@@ -21,4 +21,12 @@ class CategoryException extends \Exception
     {
         return new self($validations);
     }
+
+    /**
+     * @return self
+     */
+    public static function categoryNotFound(): self
+    {
+        return new self('Do not found category with this id!');
+    }
 }

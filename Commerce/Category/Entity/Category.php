@@ -2,6 +2,7 @@
 
 namespace Commerce\Category\Entity;
 
+use Commerce\Category\DTO\CategoryRequestDTO;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,6 +30,12 @@ class Category
         $this->id = $id;
         $this->code = $code;
         $this->name = $name;
+    }
+
+    public function populateFromDTO(CategoryRequestDTO $categoryRequestDTO)
+    {
+        self::setName($categoryRequestDTO->name);
+        self::setCode($categoryRequestDTO->code);
     }
 
     /**
@@ -63,5 +70,15 @@ class Category
     public function getUpdatedAt(): DateTime
     {
         return $this->updated_at;
+    }
+
+    public function setCode(string $code): void
+    {
+        $this->code = $code;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 }

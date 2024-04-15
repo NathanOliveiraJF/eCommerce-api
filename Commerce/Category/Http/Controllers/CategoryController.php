@@ -35,6 +35,28 @@ class CategoryController
         }
     }
 
+    public function updateCategory(): void
+    {
+
+    }
+
+    /**
+     * @param $id
+     * @return void
+     */
+    public function getCategory($id): void
+    {
+        try {
+            $category = $this->categoryService->findById($id);
+            response()->httpCode(200)->json(array('statusCode' => '200', 'category' => $category));
+        } catch (CategoryException $categoryException) {
+            response()->httpCode(404)->json(array('statusCode' => '404', 'message' => $categoryException->getMessage()));
+        }
+    }
+
+    /**
+     * @return void
+     */
     public function getAllCategory(): void
     {
         $categories = $this->categoryService->findAll();

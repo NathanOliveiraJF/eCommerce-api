@@ -10,6 +10,8 @@ use Commerce\Category\Repositories\CategoryRepositoryInterface;
 use Commerce\Category\DTO\CategoryRequestDTO;
 use Commerce\Logger\System\SystemLogger;
 use Commerce\Logger\System\SystemLoggerInterface;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 
 class CategoryService implements CategoryServiceInterface
 {
@@ -55,6 +57,17 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
+     * @throws CategoryException
+     */
+    public function update(CategoryRequestDTO $categoryRequestDTO): void
+    {
+        $validationsData = $this->validatorCategoryServiceInterface->validated($categoryRequestDTO);
+        if ($validationsData) {
+            throw CategoryException::categoryIsNotValid($validationsData);
+        }
+    }
+
+    /**
      * @return Category[]
      */
     public function findAll(): array
@@ -88,5 +101,23 @@ class CategoryService implements CategoryServiceInterface
             $this->systemLoggerInterface->execute('[category] Category code already exist!');
             throw CategoryException::alreadyExistCodeCategory($categoryDTO->code);
         }
+    }
+
+    /**
+     * @param int $id
+     * @return CategoryResponseDTO
+     * @throws CategoryException
+     */
+    public function findById(int $id): CategoryResponseDTO
+    {
+        try {
+            $categoryEntity = $this->categoryRepository->findById($id);
+        } catch (OptimisticLockException|ORMException $e) {
+            $this->systemLoggerInterface->execute($e->getMessage());
+        }
+        if (!isset($categoryEntity)) {
+            throw CategoryException::categoryNotFound();
+        }
+        return CategoryResponseDTO::create($categoryEntity);
     }
 }
