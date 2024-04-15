@@ -41,7 +41,7 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
-     * @throws CategoryException
+    * @throws CategoryException
      */
     public function save(CategoryDTO $categoryDTO): void
     {
@@ -51,7 +51,7 @@ class CategoryService implements CategoryServiceInterface
         }
         $this->checkIfCategoryAlreadyExist($categoryDTO);
         $this->categoryRepository->save($categoryDTO);
-        $this->systemLoggerInterface->execute('category successfully created');
+        $this->systemLoggerInterface->execute('[category] Category successfully created');
     }
 
     /**
@@ -61,7 +61,7 @@ class CategoryService implements CategoryServiceInterface
     {
          $categories =  $this->categoryRepository->findAll();
          if (!isset($categories)) {
-             $this->systemLoggerInterface->execute('does not exist categories');
+             $this->systemLoggerInterface->execute('[category] Does not exist categories');
              return [];
          }
          return array_map(function (Category $category) {
@@ -85,7 +85,7 @@ class CategoryService implements CategoryServiceInterface
     {
         $alreadyExist = $this->categoryRepository->findByCode($categoryDTO->code);
         if ($alreadyExist) {
-            $this->systemLoggerInterface->execute('Category code already exist!');
+            $this->systemLoggerInterface->execute('[category] Category code already exist!');
             throw CategoryException::alreadyExistCodeCategory($categoryDTO->code);
         }
     }
