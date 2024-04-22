@@ -5,9 +5,10 @@ namespace Commerce\Logger\System;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Logger;
+use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 
-class SystemLogger implements SystemLoggerInterface
+class SystemLogger extends AbstractLogger implements SystemLoggerInterface
 {
     /**
      * @var Logger
@@ -16,16 +17,6 @@ class SystemLogger implements SystemLoggerInterface
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
-    }
-
-    /**
-     * @param string $message
-     * @return void
-     */
-    public function execute(string $message): void
-    {
-        $this->logger->pushHandler(new StreamHandler(self::PATH, Level::Warning));
-        $this->logger->error($message);
     }
 
     /**

@@ -29,7 +29,7 @@ class CategoryService implements CategoryServiceInterface
     /**
      * @var SystemLogger
      */
-    private SystemLoggerInterface $systemLoggerInterface;
+    private SystemLoggerInterface $logger;
 
     /**
      * @param ValidatorCategoryServiceInterface $validator
@@ -40,7 +40,7 @@ class CategoryService implements CategoryServiceInterface
     {
         $this->categoryRepository = $categoryRepository;
         $this->validatorCategoryServiceInterface = $validator;
-        $this->systemLoggerInterface = $systemLoggerInterface;
+        $this->logger = $systemLoggerInterface;
     }
 
     /**
@@ -54,7 +54,7 @@ class CategoryService implements CategoryServiceInterface
         }
         $this->checkIfCategoryAlreadyExist($categoryDTO);
         $this->categoryRepository->save($categoryDTO);
-        $this->systemLoggerInterface->execute('[category] Category successfully created');
+        $this->logger->debug('Category successfully created');
     }
 
     /**
@@ -75,7 +75,7 @@ class CategoryService implements CategoryServiceInterface
     {
         $categories = $this->categoryRepository->findAll();
         if (!isset($categories)) {
-            $this->systemLoggerInterface->warning('Does not exist categories');
+            $this->logger->warning('Does not exist categories');
             return [];
         }
         return array_map(function (Category $category) {
@@ -99,7 +99,7 @@ class CategoryService implements CategoryServiceInterface
     {
         $alreadyExist = $this->categoryRepository->findByCode($categoryDTO->code);
         if ($alreadyExist) {
-            $this->systemLoggerInterface->warning('Category code already exist!');
+            $this->logger->warning('Category code already exist!');
             throw CategoryException::alreadyExistCodeCategory($categoryDTO->code);
         }
     }
@@ -113,8 +113,8 @@ class CategoryService implements CategoryServiceInterface
     {
         try {
             $categoryEntity = $this->categoryRepository->findById($id);
-        } catch (OptimisticLockException|ORMException $e) {
-            $this->systemLoggerInterface->log(Level::Alert, $e->getMessage(), ['exception' => $e->getTrace()] );
+        } catch (OptimisticLockException|ORMException $exception) {
+            $this->logger->error($exception->getMessage(), ['exception' => $exception]);
         }
         if (!isset($categoryEntity)) {
             throw CategoryException::categoryNotFound();
