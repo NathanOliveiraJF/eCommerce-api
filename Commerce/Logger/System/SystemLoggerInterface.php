@@ -2,11 +2,9 @@
 
 namespace Commerce\Logger\System;
 
-interface SystemLoggerInterface
+use Psr\Log\LoggerInterface;
+
+interface SystemLoggerInterface extends LoggerInterface
 {
-    /**
-     * @param string $message
-     * @return void
-     */
-    public function execute(string $message): void;
+    CONST PATH = __DIR__ . '../../../../logs/system.log';
 }

@@ -32,7 +32,11 @@ class Category
         $this->name = $name;
     }
 
-    public function populateFromDTO(CategoryRequestDTO $categoryRequestDTO)
+    /**
+     * @param CategoryRequestDTO $categoryRequestDTO
+     * @return void
+     */
+    public function populateFromDTO(CategoryRequestDTO $categoryRequestDTO): void
     {
         self::setName($categoryRequestDTO->name);
         self::setCode($categoryRequestDTO->code);

@@ -12,6 +12,7 @@ use Commerce\Logger\System\SystemLogger;
 use Commerce\Logger\System\SystemLoggerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
+use Monolog\Level;
 
 class CategoryService implements CategoryServiceInterface
 {
@@ -74,7 +75,7 @@ class CategoryService implements CategoryServiceInterface
     {
         $categories = $this->categoryRepository->findAll();
         if (!isset($categories)) {
-            $this->systemLoggerInterface->execute('[category] Does not exist categories');
+            $this->systemLoggerInterface->warning('Does not exist categories');
             return [];
         }
         return array_map(function (Category $category) {
@@ -98,7 +99,7 @@ class CategoryService implements CategoryServiceInterface
     {
         $alreadyExist = $this->categoryRepository->findByCode($categoryDTO->code);
         if ($alreadyExist) {
-            $this->systemLoggerInterface->execute('[category] Category code already exist!');
+            $this->systemLoggerInterface->warning('Category code already exist!');
             throw CategoryException::alreadyExistCodeCategory($categoryDTO->code);
         }
     }
@@ -113,7 +114,7 @@ class CategoryService implements CategoryServiceInterface
         try {
             $categoryEntity = $this->categoryRepository->findById($id);
         } catch (OptimisticLockException|ORMException $e) {
-            $this->systemLoggerInterface->execute($e->getMessage());
+            $this->systemLoggerInterface->log(Level::Alert, $e->getMessage(), ['exception' => $e->getTrace()] );
         }
         if (!isset($categoryEntity)) {
             throw CategoryException::categoryNotFound();
