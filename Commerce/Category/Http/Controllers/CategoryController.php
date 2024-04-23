@@ -7,7 +7,7 @@ use Commerce\Category\Services\CategoryService;
 use Commerce\Category\Services\CategoryServiceInterface;
 use Commerce\Category\DTO\CategoryRequestDTO;
 
-class CategoryController
+class CategoryController extends BaseController
 {
     /**
      * @var CategoryService
@@ -28,10 +28,10 @@ class CategoryController
     public function postCategory(): void
     {
         try {
-            $this->categoryService->save(CategoryRequestDTO::create(input()->all()));
-            response()->httpCode(201)->json(array('statusCode' => '201', 'message' => 'category successfully created'));
+            $category = $this->categoryService->save(CategoryRequestDTO::create(input()->all()));
+            self::sendResponse('category successfully created', $category,'201');
         } catch (CategoryException $categoryException) {
-            response()->httpCode(400)->json(array('statusCode' => '400', 'message' => $categoryException->getMessage()));
+            self::sendError($categoryException->getMessage(), '400');
         }
     }
 
@@ -48,9 +48,9 @@ class CategoryController
     {
         try {
             $category = $this->categoryService->findById($id);
-            response()->httpCode(200)->json(array('statusCode' => '200', 'category' => $category));
+            self::sendResponse('category successfully created', $category,'201');
         } catch (CategoryException $categoryException) {
-            response()->httpCode(404)->json(array('statusCode' => '404', 'message' => $categoryException->getMessage()));
+            self::sendError($categoryException->getMessage(), '404');
         }
     }
 
@@ -60,6 +60,6 @@ class CategoryController
     public function getAllCategory(): void
     {
         $categories = $this->categoryService->findAll();
-        response()->httpCode(200)->json(array('statusCode' => '200', 'categories' => $categories));
+        self::sendResponse('', $categories,'200');
     }
 }

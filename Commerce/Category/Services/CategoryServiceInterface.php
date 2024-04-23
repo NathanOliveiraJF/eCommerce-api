@@ -10,9 +10,9 @@ interface CategoryServiceInterface
 {
     /**
      * @param CategoryRequestDTO $categoryDTO
-     * @return void
+     * @return Category
      */
-    public function save(CategoryRequestDTO $categoryDTO): void;
+    public function save(CategoryRequestDTO $categoryDTO): Category;
 
     /**
      * @return array

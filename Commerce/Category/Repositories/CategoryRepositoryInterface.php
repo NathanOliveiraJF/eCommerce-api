@@ -9,9 +9,9 @@ interface CategoryRepositoryInterface
 {
     /**
      * @param CategoryRequestDTO $categoryDTO
-     * @return void
+     * @return Category
      */
-    public function save(CategoryRequestDTO $categoryDTO): void;
+    public function save(CategoryRequestDTO $categoryDTO): Category;
 
     /**
      * @param CategoryRequestDTO $categoryRequestDTO
@@ -22,9 +22,9 @@ interface CategoryRepositoryInterface
 
     /**
      * @param string $categoryCode
-     * @return array
+     * @return Category
      */
-    public function findByCode(string $categoryCode): array;
+    public function findByCode(string $categoryCode): Category;
 
     /**
      * @return array

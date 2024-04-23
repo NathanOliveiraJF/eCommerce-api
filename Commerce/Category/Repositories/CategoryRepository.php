@@ -20,16 +20,18 @@ class CategoryRepository implements CategoryRepositoryInterface
         $this->entityManagerFactory = $entityManagerFactory;
     }
 
-    public function save(CategoryRequestDTO $categoryDTO): void
+    public function save(CategoryRequestDTO $categoryDTO): Category
     {
         $entityManager = $this->entityManagerFactory->getEntityManager();
         $entityManager->persist(new Category(0, $categoryDTO->code, $categoryDTO->name));
         $entityManager->flush();
+        $entityManager->close();
+        return $this->findByCode($categoryDTO->code);
     }
 
-    public function findByCode(string $categoryCode): array
+    public function findByCode(string $categoryCode): Category
     {
-        return $this->entityManagerFactory->getEntityManager()->getRepository(Category::class)->findBy(['code' => $categoryCode]);
+        return $this->entityManagerFactory->getEntityManager()->getRepository(Category::class)->findOneBy(['code' => $categoryCode]);
     }
 
     /**

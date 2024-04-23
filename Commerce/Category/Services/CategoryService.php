@@ -46,15 +46,14 @@ class CategoryService implements CategoryServiceInterface
     /**
      * @throws CategoryException
      */
-    public function save(CategoryRequestDTO $categoryDTO): void
+    public function save(CategoryRequestDTO $categoryDTO): Category
     {
         $validationsData = $this->validatorCategoryServiceInterface->validated($categoryDTO);
         if ($validationsData) {
             throw CategoryException::categoryIsNotValid($validationsData);
         }
         $this->checkIfCategoryAlreadyExist($categoryDTO);
-        $this->categoryRepository->save($categoryDTO);
-        $this->logger->debug('Category successfully created');
+        return $this->categoryRepository->save($categoryDTO);
     }
 
     /**
@@ -98,7 +97,7 @@ class CategoryService implements CategoryServiceInterface
     private function checkIfCategoryAlreadyExist(CategoryRequestDTO $categoryDTO): void
     {
         $alreadyExist = $this->categoryRepository->findByCode($categoryDTO->code);
-        if ($alreadyExist) {
+        if (!$alreadyExist->getId()) {
             $this->logger->warning('Category code already exist!');
             throw CategoryException::alreadyExistCodeCategory($categoryDTO->code);
         }
