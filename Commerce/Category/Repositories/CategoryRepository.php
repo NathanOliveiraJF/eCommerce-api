@@ -44,7 +44,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     /**
      * @param int $id
-     * @return Category
+     * @return Category|null
      * @throws ORMException
      * @throws OptimisticLockException
      */
@@ -56,16 +56,12 @@ class CategoryRepository implements CategoryRepositoryInterface
     /**
      * @param CategoryRequestDTO $categoryRequestDTO
      * @param int $id
-     * @return void
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
     public function update(CategoryRequestDTO $categoryRequestDTO, int $id): void
     {
-        // TODO: Implement update() method.
         $entityManager = $this->entityManagerFactory->getEntityManager();
-        $categoryEntity = $entityManager->find(Category::class, $id);
-        $categoryEntity->populateFromDTO($categoryRequestDTO);
+        $category = $entityManager->getRepository(category::class)->find($id);
+        $category->populateFromDTO($categoryRequestDTO);
         $entityManager->flush();
     }
 }

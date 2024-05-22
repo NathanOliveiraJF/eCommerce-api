@@ -21,13 +21,13 @@ interface CategoryServiceInterface
 
     /**
      * @param int $id
-     * @return CategoryResponseDTO
+     * @return Category
      */
-    public function findById(int $id): CategoryResponseDTO;
+    public function findById(int $id): Category;
 
     /**
      * @param CategoryRequestDTO $categoryRequestDTO
      * @return void
      */
-    public function update(CategoryRequestDTO $categoryRequestDTO): void;
+    public function update(CategoryRequestDTO $categoryRequestDTO, int $id): void;
 }

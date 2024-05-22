@@ -59,12 +59,15 @@ class CategoryService implements CategoryServiceInterface
     /**
      * @throws CategoryException
      */
-    public function update(CategoryRequestDTO $categoryRequestDTO): void
+    public function update(CategoryRequestDTO $categoryRequestDTO, int $id): void
     {
+        
         $validationsData = $this->validatorCategoryServiceInterface->validated($categoryRequestDTO);
         if ($validationsData) {
             throw CategoryException::categoryIsNotValid($validationsData);
         }
+        $this->findById($id);
+        $this->categoryRepository->update($categoryRequestDTO, $id);
     }
 
     /**
@@ -105,10 +108,10 @@ class CategoryService implements CategoryServiceInterface
 
     /**
      * @param int $id
-     * @return CategoryResponseDTO
+     * @return Category
      * @throws CategoryException
      */
-    public function findById(int $id): CategoryResponseDTO
+    public function findById(int $id): Category
     {
         try {
             $categoryEntity = $this->categoryRepository->findById($id);
@@ -116,8 +119,8 @@ class CategoryService implements CategoryServiceInterface
             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
         }
         if (!isset($categoryEntity)) {
-            throw CategoryException::categoryNotFound();
+            throw CategoryException::categoryNotFound($id);
         }
-        return CategoryResponseDTO::create($categoryEntity);
+        return $categoryEntity;
     }
 }

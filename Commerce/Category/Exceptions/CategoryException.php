@@ -23,10 +23,11 @@ class CategoryException extends \Exception
     }
 
     /**
+     * @param $id
      * @return self
      */
-    public static function categoryNotFound(): self
+    public static function categoryNotFound($id): self
     {
-        return new self('Do not found category with this id!');
+        return new self("Do not found category with this id $id!");
     }
 }

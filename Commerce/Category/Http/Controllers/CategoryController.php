@@ -2,6 +2,7 @@
 
 namespace Commerce\Category\Http\Controllers;
 
+use Commerce\Category\DTO\CategoryResponseDTO;
 use Commerce\Category\Exceptions\CategoryException;
 use Commerce\Category\Services\CategoryService;
 use Commerce\Category\Services\CategoryServiceInterface;
@@ -29,15 +30,24 @@ class CategoryController extends BaseController
     {
         try {
             $category = $this->categoryService->save(CategoryRequestDTO::create(input()->all()));
-            self::sendResponse('category successfully created', $category,'201');
+            self::sendResponse('category successfully created','201', $category);
         } catch (CategoryException $categoryException) {
             self::sendError($categoryException->getMessage(), '400');
         }
     }
 
-    public function updateCategory(): void
+    /**
+     * @param $id
+     * @return void
+     */
+    public function updateCategory($id): void
     {
-
+        try {
+            $this->categoryService->update(CategoryRequestDTO::create(input()->all()), $id);
+            self::sendResponse('Category updated successfully!', '200');
+        } catch (CategoryException $categoryException) {
+            self::sendError($categoryException->getMessage(), '400');
+        }
     }
 
     /**
@@ -48,7 +58,7 @@ class CategoryController extends BaseController
     {
         try {
             $category = $this->categoryService->findById($id);
-            self::sendResponse('category successfully created', $category,'201');
+            self::sendResponse('category successfully created', CategoryResponseDTO::create($category),'201');
         } catch (CategoryException $categoryException) {
             self::sendError($categoryException->getMessage(), '404');
         }

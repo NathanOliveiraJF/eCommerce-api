@@ -13,11 +13,6 @@ interface CategoryRepositoryInterface
      */
     public function save(CategoryRequestDTO $categoryDTO): Category;
 
-    /**
-     * @param CategoryRequestDTO $categoryRequestDTO
-     * @param int $id
-     * @return void
-     */
     public function update(CategoryRequestDTO $categoryRequestDTO, int $id): void;
 
     /**

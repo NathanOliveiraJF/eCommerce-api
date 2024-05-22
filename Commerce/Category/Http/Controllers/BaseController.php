@@ -6,17 +6,23 @@ abstract class BaseController implements ControllerInterface
 {
     /**
      * @param string $message
-     * @param mixed $data
+     * @param mixed $data (optional)
      * @param string $statusCode
      * @return void
      */
-    public function sendResponse(string $message, mixed $data, string $statusCode): void
+    public function sendResponse(string $message, string $statusCode, mixed $data = []): void
     {
         $response = [
             'statusCode' => $statusCode,
-            'data' => $data,
             'message' => $message
         ];
+        if ($data) {
+            $response = [
+                'statusCode' => $statusCode,
+                'data' => $data,
+                'message' => $message
+            ];
+        }
         response()->httpCode($statusCode)->json($response);
     }
 
